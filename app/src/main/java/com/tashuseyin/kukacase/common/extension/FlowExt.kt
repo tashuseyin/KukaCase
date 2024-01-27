@@ -5,6 +5,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.HttpException
+import java.io.IOException
 
 fun <T> tryFlowOrEmitError(
     dispatcher: CoroutineDispatcher = Dispatchers.Default,
@@ -12,7 +14,9 @@ fun <T> tryFlowOrEmitError(
 ) = flow {
     try {
         emit(DataResult.Success(block()))
-    } catch (e: Exception) {
-        emit(DataResult.Error(e))
+    }  catch (e: HttpException) {
+        emit(DataResult.Error(e.localizedMessage ?: "An unexpected error occurred"))
+    } catch (e: IOException) {
+        emit(DataResult.Error("Couldn't reach server. Check your internet connection."))
     }
 }.flowOn(dispatcher)
