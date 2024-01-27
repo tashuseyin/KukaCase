@@ -7,10 +7,8 @@ navigation = "2.7.6"
 material = "1.11.0"
 constraintlayout = "2.1.4"
 lifecycle-viewmodel = "2.4.1"
-ksp = "1.9.0-1.0.13"
 android-application = "8.2.1"
 kotlin = "1.9.0"
-room = "2.5.2"
 hilt = "2.48"
 retrofit = "2.9.0"
 okhttp = "4.12.0"
@@ -27,15 +25,11 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 
+
 #lifecycle dependencies
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle-viewmodel" }
 
-
-# room dependencies
-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 # dagger-hilt dependencies
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -69,7 +63,7 @@ splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "spl
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-application" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
 navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
