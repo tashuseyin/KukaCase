@@ -13,7 +13,7 @@ interface KukaRepository {
         sort: String?
     ): CategoryProducts
 
-    suspend fun getProductDetail(id: String): CategoryProductsItem
+    suspend fun getProductDetail(id: Int): CategoryProductsItem
 
     suspend fun getOutfits(): Outfits
 }

@@ -4,4 +4,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="arrowicon">arrowIcon</string>
     <string name="categories">Categories</string>
+    <string name="product_image">product image</string>
+    <string name="arrow_left">arrow left</string>
+    <string name="add_to_card">Add to card</string>
+    <string name="added_to_cart">Added to Cart</string>
+    <string name="description">Description</string>
+    <string name="add_and_get_discount">Add And Get Discount</string>
 </resources>

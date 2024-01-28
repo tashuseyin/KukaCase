@@ -19,6 +19,6 @@ interface ProductsApiService {
 
     @GET("products/{id}")
     suspend fun getProductDetail(
-        @Path("id") id: String,
+        @Path("id") id: Int,
     ): CategoryProductsItem
 }

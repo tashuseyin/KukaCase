@@ -14,7 +14,7 @@ class GetProductDetailUseCase @Inject constructor(
     private val kukaRepository: KukaRepository,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) {
-    suspend fun getProductDetail(id: String): Flow<DataResult<ProductItemUIModel>> =
+    suspend fun getProductDetail(id: Int): Flow<DataResult<ProductItemUIModel>> =
         tryFlowOrEmitError(dispatcher) {
             kukaRepository.getProductDetail(id).toUIModel()
         }

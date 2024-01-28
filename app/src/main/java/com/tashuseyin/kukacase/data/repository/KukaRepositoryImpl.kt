@@ -24,7 +24,7 @@ class KukaRepositoryImpl @Inject constructor(
         return productsApiService.getProductListByCategory(category, sort)
     }
 
-    override suspend fun getProductDetail(id: String): CategoryProductsItem {
+    override suspend fun getProductDetail(id: Int): CategoryProductsItem {
         return productsApiService.getProductDetail(id)
     }
 

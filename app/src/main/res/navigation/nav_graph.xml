@@ -24,12 +24,15 @@
             app:destination="@id/productDetailFragment" />
         <argument
             android:name="category"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.tashuseyin.kukacase.features.product_detail.ProductDetailFragment"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
