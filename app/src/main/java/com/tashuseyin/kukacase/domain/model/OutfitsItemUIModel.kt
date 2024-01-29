@@ -9,5 +9,7 @@ data class OutfitsItemUIModel(
     val ratingRate: Double?,
     val ratingCount: Int?,
     val originalPrice: Double?,
-    val discountLevels: List<DiscountLevel?>?
+    var discountPrice: Double?,
+    val discountLevels: List<DiscountLevel?>?,
+    var isAddCart: Boolean = false
 )

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tashuseyin.kukacase.common.util.CurrencyFormatter
-import com.tashuseyin.kukacase.common.util.loadImageView
+import com.tashuseyin.kukacase.common.extension.loadImageView
 import com.tashuseyin.kukacase.databinding.ProductItemBinding
 import com.tashuseyin.kukacase.domain.model.ProductItemUIModel
 
@@ -16,12 +16,13 @@ class ProductListAdapter(
     class ProductListViewHolder(private val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(productItem: ProductItemUIModel, onItemClickListener: (Int) -> Unit) {
-            binding.productTitle.text = productItem.title
-            binding.productRatingRate.rating = productItem.ratingRate?.toFloat() ?: 0f
-            binding.productRatingCount.text = "(${productItem.ratingCount})"
-            binding.productOriginalPrice.text = CurrencyFormatter.convert(productItem.price)
-            binding.productImage.loadImageView(productItem.image)
-
+            binding.apply {
+                productTitle.text = productItem.title
+                productRatingRate.rating = productItem.ratingRate?.toFloat() ?: 0f
+                productRatingCount.text = "(${productItem.ratingCount})"
+                productOriginalPrice.text = CurrencyFormatter.convert(productItem.price)
+                productImage.loadImageView(productItem.image)
+            }
             binding.productItem.setOnClickListener {
                 productItem.id?.let { onItemClickListener.invoke(it) }
             }

@@ -62,6 +62,7 @@ dependencies {
 
     //hilt
     implementation(libs.hilt)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.hilt.compiler)
 
     //retrofit

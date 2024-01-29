@@ -85,7 +85,7 @@
             android:layout_weight="1"
             android:visibility="gone"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="64,0 €" />

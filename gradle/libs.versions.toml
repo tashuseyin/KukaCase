@@ -17,6 +17,7 @@ coroutines = "1.7.3"
 coil = "2.5.0"
 splash-screen = "1.0.1"
 kotlin-serialization = "2.0.0-Beta3"
+swiperefreshlayout = "1.1.0"
 
 
 [libraries]
@@ -58,6 +59,7 @@ coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 
 # splashscreen dependencies
 splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 
 [plugins]

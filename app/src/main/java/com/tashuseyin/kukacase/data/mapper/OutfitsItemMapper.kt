@@ -11,6 +11,7 @@ fun OutfitsItem.toUIModel(): OutfitsItemUIModel {
         ratingRate = this.rating?.rate,
         ratingCount = this.rating?.count,
         originalPrice = this.price?.originalPrice,
-        discountLevels = this.price?.discountLevels
+        discountLevels = this.price?.discountLevels,
+        discountPrice = null
     )
 }

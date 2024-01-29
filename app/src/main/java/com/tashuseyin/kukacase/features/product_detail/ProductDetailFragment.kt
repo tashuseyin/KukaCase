@@ -10,8 +10,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.tashuseyin.kukacase.R
 import com.tashuseyin.kukacase.common.util.CurrencyFormatter
-import com.tashuseyin.kukacase.common.util.loadImageView
+import com.tashuseyin.kukacase.common.extension.loadImageView
 import com.tashuseyin.kukacase.databinding.FragmentProductDetailBinding
 import com.tashuseyin.kukacase.features.product_detail.adapter.OutfitsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,22 +50,35 @@ class ProductDetailFragment : Fragment() {
     private fun collectUIState() {
         lifecycleScope.launch {
             productDetailViewModel.uiState.collect { state ->
-                binding.progressCircular.isVisible = state.isLoading
-                binding.detailCenterLayout.isVisible = state.isLoading.not()
-                state.productItemUIModel?.let {
-                    binding.productDescription.text = it.description
-                    binding.productImage.loadImageView(it.image)
-                    binding.productTitle.text = it.title
-                    binding.productRatingRate.rating = it.ratingRate?.toFloat() ?: 0f
-                    binding.productRatingCount.text = "(${it.ratingCount})"
-                    binding.productPrice.text = CurrencyFormatter.convert(it.price)
-                    binding.productDetailToolbarTitle.text = it.title
-                }
-                if (state.outfitsList.isNotEmpty()) {
-                    outfitsAdapter = OutfitsAdapter(state.outfitsList) { id ->
+                binding.apply {
+                    progressCircular.isVisible = state.isLoading
+                    detailCenterLayout.isVisible = state.isLoading.not()
 
+                    state.productItemUIModel?.let { productItem ->
+                        productItem.apply {
+                            productDescription.text = description
+                            productImage.loadImageView(image)
+                            productTitle.text = title
+                            productRatingRate.rating = ratingRate?.toFloat() ?: 0f
+                            productRatingCount.text = "(${ratingCount})"
+                            productPrice.text = CurrencyFormatter.convert(price)
+                            productDetailToolbarTitle.text = title
+
+                            addToCart.root.setOnClickListener {
+                                addToCart.root.isEnabled = false
+                                addToCart.root.setText(R.string.added_to_cart)
+                                productDetailViewModel.addToCart(id)
+                            }
+                        }
                     }
-                    binding.productDetailRecyclerview.adapter = outfitsAdapter
+
+                    if (state.outfitsList.isNotEmpty()) {
+                        outfitsAdapter = OutfitsAdapter(state.outfitsList) { id ->
+                            productDetailViewModel.outfitsAddToCart(id)
+                            outfitsAdapter.setData(state.outfitsList)
+                        }
+                        productDetailRecyclerview.adapter = outfitsAdapter
+                    }
                 }
             }
         }

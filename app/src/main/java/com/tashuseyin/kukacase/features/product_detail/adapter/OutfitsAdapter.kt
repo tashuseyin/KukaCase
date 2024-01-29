@@ -1,38 +1,48 @@
 package com.tashuseyin.kukacase.features.product_detail.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.tashuseyin.kukacase.R
 import com.tashuseyin.kukacase.common.util.CurrencyFormatter
-import com.tashuseyin.kukacase.common.util.loadImageView
+import com.tashuseyin.kukacase.common.extension.loadImageView
 import com.tashuseyin.kukacase.databinding.ProductItemBinding
 import com.tashuseyin.kukacase.domain.model.OutfitsItemUIModel
 
 
 class OutfitsAdapter(
-    private val outfitsList: List<OutfitsItemUIModel>,
-    private val onItemClickListener: (Int?) -> Unit
+    private var outfitsList: List<OutfitsItemUIModel>,
+    private val onItemClickListener: (Int?) -> Unit,
 ) : RecyclerView.Adapter<OutfitsAdapter.OutfitsViewHolder>() {
 
-    class OutfitsViewHolder(
+    inner class OutfitsViewHolder(
         private val binding: ProductItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(outfits: OutfitsItemUIModel, onItemClickListener: (Int?) -> Unit) {
-            binding.productTitle.text = outfits.title
-            binding.productRatingRate.rating = outfits.ratingRate?.toFloat() ?: 0f
-            binding.productRatingCount.text = "(${outfits.ratingCount})"
-            binding.productOriginalPrice.text = CurrencyFormatter.convert(outfits.originalPrice)
-            binding.productImage.loadImageView(outfits.image)
-            binding.addToCart.root.isVisible = true
+            binding.apply {
+                productTitle.text = outfits.title
+                productRatingRate.rating = outfits.ratingRate?.toFloat() ?: 0f
+                productRatingCount.text = "(${outfits.ratingCount})"
+                productOriginalPrice.text = CurrencyFormatter.convert(outfits.originalPrice)
+                outfits.discountPrice?.let {
+                    productDiscountPrice.text = CurrencyFormatter.convert(it)
+                    productDiscountPrice.isVisible = true
+                    productOriginalPrice.paintFlags =
+                        productOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                productImage.loadImageView(outfits.image)
+                addToCart.root.isVisible = true
 
-            binding.addToCart.root.setOnClickListener {
-                binding.addToCart.root.isEnabled = false
-                binding.addToCart.root.setText(R.string.added_to_cart)
-
+                addToCart.root.setOnClickListener {
+                    addToCart.root.isEnabled = false
+                    addToCart.root.setText(R.string.added_to_cart)
+                    outfits.isAddCart = true
+                    onItemClickListener.invoke(outfits.id)
+                }
             }
         }
     }
@@ -48,5 +58,11 @@ class OutfitsAdapter(
 
     override fun getItemCount(): Int {
         return outfitsList.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(outfitsList: List<OutfitsItemUIModel>) {
+        this.outfitsList = outfitsList
+        notifyDataSetChanged()
     }
 }
