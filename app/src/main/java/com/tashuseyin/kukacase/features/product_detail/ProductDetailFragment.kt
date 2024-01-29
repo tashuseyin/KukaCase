@@ -61,7 +61,9 @@ class ProductDetailFragment : Fragment() {
                     binding.productDetailToolbarTitle.text = it.title
                 }
                 if (state.outfitsList.isNotEmpty()) {
-                    outfitsAdapter = OutfitsAdapter(state.outfitsList) {}
+                    outfitsAdapter = OutfitsAdapter(state.outfitsList) { id ->
+
+                    }
                     binding.productDetailRecyclerview.adapter = outfitsAdapter
                 }
             }

@@ -19,7 +19,7 @@ class ProductListAdapter(
             binding.productTitle.text = productItem.title
             binding.productRatingRate.rating = productItem.ratingRate?.toFloat() ?: 0f
             binding.productRatingCount.text = "(${productItem.ratingCount})"
-            binding.productPrice.text = CurrencyFormatter.convert(productItem.price)
+            binding.productOriginalPrice.text = CurrencyFormatter.convert(productItem.price)
             binding.productImage.loadImageView(productItem.image)
 
             binding.productItem.setOnClickListener {

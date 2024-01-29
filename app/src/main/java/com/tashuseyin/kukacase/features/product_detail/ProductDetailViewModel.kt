@@ -35,6 +35,8 @@ class ProductDetailViewModel @Inject constructor(
         getOutfits()
     }
 
+
+
     private fun getOutfits() {
         viewModelScope.launch {
             getOutfitsUseCase.getOutfits()
